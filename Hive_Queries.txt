@@ -1,0 +1,17 @@
+Database creation:
+>CREATE DATABASE IF NOT EXISTS db1;
+
+Table creation:
+>CREATE TABLE IF NOT EXISTS tb1 (monthyear String, area_code String, crime_type String)
+>COMMENT “GDELT DB”
+>ROW FORMAT DELIMITED
+>FIELDS TERMINATED BY ‘,’
+>LINES TERMINATED BY ‘\n’
+>STORED AS TEXTFILE;
+
+Loading Data into table:
+>LOAD DATA LOCAL INPATH ‘/home/training/Desktop/data.csv’
+>OVERWRITE INTO TABLE tb1;
+
+Hive I query: get the top 5 states with highest amount of crime:
+>SELECT area_code,count(crime_type) as CRIME_TOTAL FROM tb1 GROUP BY area_code ORDER BY CRIME_TOTAL DESC LIMIT 5;
